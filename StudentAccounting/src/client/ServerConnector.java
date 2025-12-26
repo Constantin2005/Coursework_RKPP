@@ -69,4 +69,10 @@ public class ServerConnector {
             e.printStackTrace();
         }
     }
+    public Student getStudentById(int id) throws IOException, ClassNotFoundException {
+        out.writeObject("GET_BY_ID");
+        out.writeObject(id);
+        out.flush();
+        return (Student) in.readObject();
+    }
 }

@@ -73,6 +73,17 @@ class ClientHandler extends Thread {
                     case "EXIT":
                         System.out.println("Клиент отключился: " + socket.getInetAddress());
                         return;
+                    case "GET_BY_ID":
+                        int id = (int) in.readObject();
+                        Student student = null;
+                        for (Student s : catalog.getAllStudents()) {
+                            if (s.getId() == id) {
+                                student = s;
+                                break;
+                            }
+                        }
+                        out.writeObject(student);
+                        break;
                 }
                 out.flush();
             }
