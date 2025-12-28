@@ -1,4 +1,3 @@
-// Файл: StudentCatalog.java (Модель каталога)
 package model;
 
 import java.io.*;
@@ -27,7 +26,7 @@ public class StudentCatalog {
     }
 
     public synchronized List<Student> getAllStudents() {
-        return new ArrayList<>(students); // Возвращаем копию
+        return new ArrayList<>(students);
     }
 
     public synchronized List<Student> findStudentsByLastName(String lastName) {
@@ -48,7 +47,17 @@ public class StudentCatalog {
         return removed;
     }
 
-    // Приватные методы для работы с файлом (Хранилище)
+    // НОВЫЙ МЕТОД: поиск студента по ID
+    public synchronized Student getStudentById(int id) {
+        for (Student s : students) {
+            if (s.getId() == id) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    // Приватные методы для работы с файлом
     private void saveToFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(DATA_FILE))) {
             oos.writeObject(students);
