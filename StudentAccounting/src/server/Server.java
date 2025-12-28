@@ -75,13 +75,7 @@ class ClientHandler extends Thread {
                         return;
                     case "GET_BY_ID":
                         int id = (int) in.readObject();
-                        Student student = null;
-                        for (Student s : catalog.getAllStudents()) {
-                            if (s.getId() == id) {
-                                student = s;
-                                break;
-                            }
-                        }
+                        Student student = catalog.getStudentById(id); // Используем новый метод
                         out.writeObject(student);
                         break;
                 }
